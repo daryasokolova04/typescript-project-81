@@ -9,6 +9,7 @@ jobs:
       - uses: remarkablemark/setup-codeclimate@v2
       - run: |
           cc-test-reporter before-build
+          npm install
           npm test
           cc-test-reporter after-build --exit-code $?
         env:
