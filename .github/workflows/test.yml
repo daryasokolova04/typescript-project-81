@@ -9,6 +9,7 @@ jobs:
       - name: install lcov
         run: npm install lcov
       - uses: remarkablemark/setup-codeclimate@v2
+      - uses: hrishikesh-kadam/setup-lcov@v1
       - name: Запуск тестов и сбор покрытия
         run: |
           cc-test-reporter before-build
