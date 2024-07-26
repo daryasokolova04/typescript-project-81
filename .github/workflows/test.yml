@@ -6,11 +6,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: install lcov
+        run: npm install lcov
       - uses: remarkablemark/setup-codeclimate@v2
-      - run: |
+      - name: Запуск тестов и сбор покрытия
+        run: |
           cc-test-reporter before-build
           npm install
           npm test
-          cc-test-reporter after-build -t xccov --exit-code $?
+          lcov --capture --directory coverage --output-file coverage.info
+          lcov --remove coverage.info '*/tests/*' '*/vendor/*' --output-file coverage.lcov
+          cc-test-reporter after-build -t lcov coverage.lcov --exit-code $?
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
