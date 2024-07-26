@@ -14,8 +14,11 @@ jobs:
           cc-test-reporter before-build
           npm install
           npm test
+
           lcov --capture --directory coverage --output-file coverage.info
+
           lcov --remove coverage.info '*/tests/*' '*/vendor/*' --output-file coverage.lcov
+
           cc-test-reporter after-build -t lcov coverage.lcov --exit-code $?
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
