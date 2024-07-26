@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: install lcov
-        run: npm install lcov
+        run: brew install lcov
       - uses: remarkablemark/setup-codeclimate@v2
       - name: Запуск тестов и сбор покрытия
         run: |
