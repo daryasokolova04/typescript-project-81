@@ -5,10 +5,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    steps:
       - uses: actions/checkout@v4
         with:
-            sparse-checkout: .
+          sparse-checkout: .
       - uses: remarkablemark/setup-codeclimate@v2
       - run: |
           cc-test-reporter before-build
