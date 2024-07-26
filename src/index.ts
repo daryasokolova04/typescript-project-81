@@ -1,4 +1,4 @@
-class Tag {
+export class Tag {
   public singleTags: string[];
 
   constructor(
