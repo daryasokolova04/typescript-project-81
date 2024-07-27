@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "vitest",
-    "lint": "eslint"
+    "lint": "eslint ."
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "geninfo": "^1.16.0",
+    "node": "^20.9.0",
     "typescript": "^5.5.4",
     "vite": "^5.3.5"
   },
