@@ -11,14 +11,9 @@ jobs:
       - uses: hrishikesh-kadam/setup-lcov@v1
       - name: Запуск тестов и сбор покрытия
         run: cc-test-reporter before-build
-          npm install
-          npm test -- --coverage -- --fprofile-arcs --ftest-coverage
-          mkdir coverage
-
-          lcov --rc branch_coverage=1 --capture --directory coverage --output-file coverage.info
-
-          lcov --remove coverage.info '*/tests/*' --output-file coverage.lcov
-
-          cc-test-reporter after-build -t lcov coverage.lcov --exit-code $?
+          lcov --rc branch_coverage=1 --directory coverage --zerocounters
+          lcov --directory coverage --capture --output-file coverage.info
+          lcov --remove coverage.info '*/tests/*' --output-file coverage.info
+          cc-test-reporter after-build -t lcov coverage.info --exit-code $?
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
