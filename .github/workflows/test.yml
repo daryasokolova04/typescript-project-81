@@ -17,12 +17,7 @@ jobs:
           npm i @vitest/coverage-v8
           npm test -- --coverage -- --fprofile-arcs --ftest-coverage
           lcov --rc branch_coverage=1 --capture --directory coverage --output-file coverage.info || echo "Не удалось создать coverage.info"
-          lcov --remove coverage.info '*/tests/*' --output-file coverage.lcov || echo "Не 
-          if [ -f coverage.info ]; then
-          cc-test-reporter after-build -t lcov coverage.lcov --exit-code $?
-          else
-          echo "coverage.info не найден или пуст. Пропуск обработки."
-          exit 0
-          fi
+          lcov --remove coverage.info '*/tests/*' --output-file coverage.lcov || echo "Не удалось создать coverage.lcov"
+          cc-test-reporter after-build -t lcov coverage.lcov --exit-code $? || echo "coverage.info не найден или пуст. Пропуск обработки." exit 0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
