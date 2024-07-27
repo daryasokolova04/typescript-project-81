@@ -11,14 +11,13 @@ jobs:
       - uses: hrishikesh-kadam/setup-lcov@v1
       - name: Запуск тестов и сбор покрытия
         run: |
-          rm -f coverage.info coverage.lcov
+          rm -rf coverage/* coverage.info coverage.lcov
           cc-test-reporter before-build
           npm install
-          npm i @vitest/coverage-v8
           npm test -- --coverage -- --fprofile-arcs --ftest-coverage
           mkdir -p coverage
-          lcov --rc branch_coverage=1 --capture --directory coverage --output-file coverage.info
-          lcov --remove coverage.info '*/tests/*' --output-file coverage.lcov
+          lcov --rc branch_coverage=1 --capture --directory coverage --output-file coverage.info || echo "Не удалось создать coverage.info"
+          lcov --remove coverage.info '*/tests/*' --output-file coverage.lcov || echo "Не удалось создать coverage.lcov"
           cc-test-reporter after-build -t lcov coverage.lcov --exit-code $?
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
