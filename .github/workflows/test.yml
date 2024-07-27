@@ -10,15 +10,14 @@ jobs:
       - uses: remarkablemark/setup-codeclimate@v2
       - uses: hrishikesh-kadam/setup-lcov@v1
       - name: Запуск тестов и сбор покрытия
-        run: cc-test-reporter before-build
+        run: |
+          rm -f coverage.info coverage.lcov
+          cc-test-reporter before-build
           npm install
           npm test -- --coverage -- --fprofile-arcs --ftest-coverage
-          mkdir coverage
-
+          mkdir -p coverage
           lcov --rc branch_coverage=1 --capture --directory coverage --output-file coverage.info
-
           lcov --remove coverage.info '*/tests/*' --output-file coverage.lcov
-
           cc-test-reporter after-build -t lcov coverage.lcov --exit-code $?
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
