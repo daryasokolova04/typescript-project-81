@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "vitest",
-    "lint": "eslint ."
+    "lint": "npm run eslint .",
+    "test-coverage": "npx vitest run --coverage"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@vitest/coverage-v8": "^2.0.4",
+    "eslint": "^9.8.0",
     "geninfo": "^1.16.0",
     "node": "^20.9.0",
     "typescript": "^5.5.4",
