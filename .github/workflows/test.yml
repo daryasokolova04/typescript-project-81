@@ -15,9 +15,9 @@ jobs:
           npm install
           npm test
 
-          lcov --capture --directory coverage --output-file coverage.info || echo "no coverage data captured"
+          lcov --capture --directory coverage --output-file coverage.info
 
-          lcov --remove coverage.info '*/tests/*' '*/vendor/*' --output-file coverage.lcov || echo "could not remove certain paths from coverage"
+          lcov --remove coverage.info '*/tests/*' '*/vendor/*' --output-file coverage.lcov
 
           cc-test-reporter after-build -t lcov coverage.lcov --exit-code $?
         env:
